@@ -1,19 +1,17 @@
 /*
-Version 5: Loops of Logic 
-  1. .displayTodos should show .todoText
-  2.                  ... tell you if .todos is empty
-  3.                 ... show .completed
-  */
+Version 6: Thinking in Code
+1. .togglaAll: if everything's true, make everything false.
+2. .togglaAll: otherwise, make everything true.
+
+*/
 
 var todoList = {
-  todos: [], // items no longer needed
+  todos: [],
   displayTodos: function() {
-    // if/else statement added
     if (this.todos.length === 0) {
       console.log("Your Todo list is empty!");
     } else {
       console.log("My Todos");
-      // for loop added
       for (var i = 0; i < this.todos.length; i++) {
         if (this.todos[i].completed === true) {
           console.log("(X)", this.todos[i].todoText);
@@ -42,5 +40,28 @@ var todoList = {
     var todo = this.todos[position];
     todo.completed = !todo.completed;
     this.displayTodos();
+  },
+  toggleAll: function() {
+    var totalTodos = this.todos.length;
+    var completedTodos = 0;
+
+  // Get number of completed todos.
+    for (var i = 0; i < totalTodos; i++) {
+      if (this.todos[i].completed === true) {
+        completedTodos++;
+      }
+    }
+
+  // Case 1: If everything's true, make everything false.
+    if (completedTodos === totalTodos) {
+      for (var i = 0; i < totalTodos; i++) {
+        this.todos[i].completed = false;
+    }
+  // Case 2: Otherwise, make everything true.
+  } else {
+    for (var i = 0; i <totalTodos; i++) {
+      this.todos[i].completed = true;
+      }
+    }
   }
 };
