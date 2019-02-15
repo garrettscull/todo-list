@@ -1,18 +1,32 @@
+/*
+Version 4: Booleans
+  1. todoList.addTodo should add objects.
+  2. todoList.changeToto should change the todoText property.
+  3. todoList.toggleCompleted should change the completed property. */
+
 var todoList = {
   todos: ["item 1", "item 2", "item 3"],
   displayTodos: function() {
     console.log("My Todos", this.todos);
   },
-  addTodo: function(todo) {
-    this.todos.push(todo);
+  addTodo: function(todoText) {
+    this.todos.push({
+      todoText: todoText,
+      completed: false
+    });
     this.displayTodos();
   },
-  changeTodo: function(position, newValue) {
-    this.todos[position] = newValue;
+  changeTodo: function(position, todoText) {
+    this.todos[position].todoText = todoText;
     this.displayTodos();
   },
   deleteTodo: function(position) {
     this.todos.splice(position, 1);
+    this.displayTodos();
+  },
+  toggleCompleted: function(position) {
+    var todo = this.todos[position];
+    todo.completed = !todo.completed;
     this.displayTodos();
   }
 };
