@@ -1,7 +1,11 @@
 /*
-Version 6: Thinking in Code
-1. .togglaAll: if everything's true, make everything false.
-2. .togglaAll: otherwise, make everything true.
+Version 7: HTML in DOM
+
+1. There should be a "Display Todos" & "Toggle All" button in the app.
+2. Clicking "Display Todos" should run todoList.displayTodos.
+-----Get access to Display Todos button
+-----Run display Todos method when someone clicks "Display Todos" button.
+3. Clicking "Toggle All" should run todoList.toggleAll.
 
 */
 
@@ -45,23 +49,36 @@ var todoList = {
     var totalTodos = this.todos.length;
     var completedTodos = 0;
 
-  // Get number of completed todos.
+    // Get number of completed todos.
     for (var i = 0; i < totalTodos; i++) {
       if (this.todos[i].completed === true) {
         completedTodos++;
       }
     }
 
-  // Case 1: If everything's true, make everything false.
+    // Case 1: If everything's true, make everything false.
     if (completedTodos === totalTodos) {
       for (var i = 0; i < totalTodos; i++) {
         this.todos[i].completed = false;
-    }
-  // Case 2: Otherwise, make everything true.
-  } else {
-    for (var i = 0; i <totalTodos; i++) {
-      this.todos[i].completed = true;
+      }
+      // Case 2: Otherwise, make everything true.
+    } else {
+      for (var i = 0; i < totalTodos; i++) {
+        this.todos[i].completed = true;
       }
     }
+    this.displayTodos();
   }
 };
+
+// Accessing DOM - displayAll & toggleAll buttons
+var displayTodosButton = document.getElementById("displayTodosButton");
+var toggleAllButton = document.getElementById("toggleAllButton");
+
+displayTodosButton.addEventListener("click", function() {
+  todoList.displayTodos();
+});
+
+toggleAllButton.addEventListener("click", function() {
+  todoList.toggleAll();
+});
