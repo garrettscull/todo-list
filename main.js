@@ -1,13 +1,27 @@
 /*
-Version 4: Booleans
-  1. todoList.addTodo should add objects.
-  2. todoList.changeToto should change the todoText property.
-  3. todoList.toggleCompleted should change the completed property. */
+Version 5: Loops of Logic 
+  1. .displayTodos should show .todoText
+  2.                  ... tell you if .todos is empty
+  3.                 ... show .completed
+  */
 
 var todoList = {
-  todos: ["item 1", "item 2", "item 3"],
+  todos: [], // items no longer needed
   displayTodos: function() {
-    console.log("My Todos", this.todos);
+    // if/else statement added
+    if (this.todos.length === 0) {
+      console.log("Your Todo list is empty!");
+    } else {
+      console.log("My Todos");
+      // for loop added
+      for (var i = 0; i < this.todos.length; i++) {
+        if (this.todos[i].completed === true) {
+          console.log("(X)", this.todos[i].todoText);
+        } else {
+          console.log("( )", this.todos[i].todoText);
+        }
+      }
+    }
   },
   addTodo: function(todoText) {
     this.todos.push({
