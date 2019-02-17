@@ -10,15 +10,19 @@
     <h1>Todo List</h1>
 
     <div>
-    <button onclick="handlers.displayTodos()"> Display Todos</button>
     <button onclick="handlers.toggleAll()"> Toggle All</button>
     </div>
 
     <div>
-      <button onclick="handlers.deleteTodo()"></button>
-      <input id="deleteTodoPostionInput" type="number">
+      <button onclick="handlers.addTodo()">Add</button>
+      <input id="addTodoTextInput" type="text">
     </div>
 
+    <div>
+      <button onclick="handlers.changeTodo()">Change Todo</button>
+      <input id="changeTodoPositionInput" type="number">
+      <input id="changeTodoTextInput" type="text">
+    </div>
 
     <div>
       <button onclick="handlers.toggleCompleted()">Toggle Completed</button>

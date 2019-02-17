@@ -1,58 +1,33 @@
 /*
-Version 8: Getting Data from inputs
+Version 9: Escape from the Console
 
-1. it should have working controls for .addTodo
-------Input section is needed to add a todo.
-------Input section should clear after button is clicked.
-
-2. it should have working controls for .changeTodo
-------Input is needed to select which todo to change.
-------Input is needed to change the chosen todo's contents.
-------Both inputs should clear after button is clicked.
-
-3. it should have working controls for .deleteTodo
-------Input is needed to decide which todo to delete.
-------Input should clear after button is clicked.
-
-4. it should have working controls for .toggleCompleted
+1. There should be an li element for every todo.
+-------There should be a new object with a function to view array items.
+-------DisplayTodos should first clear current li's before adding new ones.
+2. Each li element should contain .todoText.
+3. Each li element should show .completed.
+-------Add object to the end of all handlers.
+-------Delete the Display Todos button & curresponding method in the handlers object, as well as all other previous displayTodos methods.
 
 */
 
 var todoList = {
   todos: [],
-  displayTodos: function() {
-    if (this.todos.length === 0) {
-      console.log("Your Todo list is empty!");
-    } else {
-      console.log("My Todos");
-      for (var i = 0; i < this.todos.length; i++) {
-        if (this.todos[i].completed === true) {
-          console.log("(X)", this.todos[i].todoText);
-        } else {
-          console.log("( )", this.todos[i].todoText);
-        }
-      }
-    }
-  },
   addTodo: function(todoText) {
     this.todos.push({
       todoText: todoText,
       completed: false
     });
-    this.displayTodos();
   },
   changeTodo: function(position, todoText) {
     this.todos[position].todoText = todoText;
-    this.displayTodos();
   },
   deleteTodo: function(position) {
     this.todos.splice(position, 1);
-    this.displayTodos();
   },
   toggleCompleted: function(position) {
     var todo = this.todos[position];
     todo.completed = !todo.completed;
-    this.displayTodos();
   },
   toggleAll: function() {
     var totalTodos = this.todos.length;
@@ -115,5 +90,27 @@ var handlers = {
     );
     todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
     toggleCompletedPositionInput.value = "";
+  }
+};
+
+
+var view = {
+  displayTodos: function() {
+    var todosUl = document.querySelector('ul');
+    todosUl.innerHTML = '';
+    for (var i = 0; i < todoList.todos.length; i++) {
+      var todoLi = document.createElement('li');
+      var todo = todoList.todos[i];
+      var todoTextWithCompletion = '';
+
+      if (todo.completed === true) {
+        todoTextWithCompletion = '(X) ' + todoText;
+      } else {
+        todoTextWithCompletion = '( ) ' + todoText;
+      }
+
+      todoLi.textContent = todoTextWithCompletion;
+      todosUl.appendChild(todoLi);
+    }
   }
 };
