@@ -54,7 +54,6 @@ var todoList = {
         this.todos[i].completed = true;
       }
     }
-    this.displayTodos();
   }
 };
 
@@ -107,9 +106,9 @@ var view = {
       var todoTextWithCompletion = "";
 
       if (todo.completed === true) {
-        todoTextWithCompletion = "(X) " + todoText;
+        todoTextWithCompletion = "(X) " + todo.todoText;
       } else {
-        todoTextWithCompletion = "( ) " + todoText;
+        todoTextWithCompletion = "( ) " + todo.todoText;
       }
 
       todoLi.id = i;
@@ -119,20 +118,20 @@ var view = {
     }
   },
   createDeleteButton: function() {
-    var deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.className = 'deleteButton';
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "deleteButton";
     return deleteButton;
   },
   setUpEventListeners: function() {
-    var todosUl = document.querySelector('ul');
+    var todosUl = document.querySelector("ul");
 
-    todosUl.addEventListener('click', function(event) {
+    todosUl.addEventListener("click", function(event) {
       // Get the element that was clicked on.
       var elementClicked = event.target;
 
       // Check if element clicked is a delete button.
-      if (elementClicked.className === 'deleteButton') {
+      if (elementClicked.className === "deleteButton") {
         handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
       }
     });
