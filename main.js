@@ -57,13 +57,11 @@ var todoList = {
 
 // Added handler object to replace previous eventListeners
 var handlers = {
-  displayTodos: function() {
-    todoList.displayTodos();
-  },
   addTodo: function() {
     var addTodoTextInput = document.getElementById("addTodoTextInput");
     todoList.addTodo(addTodoTextInput.value);
     addTodoTextInput.value = "";
+    view.displayTodos();
   },
   changeTodo: function() {
     var changeTodoPositionInput = document.getElementById(
@@ -76,6 +74,7 @@ var handlers = {
     );
     changeTodoPositionInput.value = "";
     changeTodoTextInput.value = "";
+    view.displayTodos();
   },
   deleteTodo: function(position) {
     var deleteTodoPositionInput = document.getElementById(
@@ -83,6 +82,7 @@ var handlers = {
     );
     todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
     deleteTodoPositionInput.value = "";
+    view.displayTodos();
   },
   toggleCompleted: function() {
     var toggleCompletedPositionInput = document.getElementById(
@@ -90,23 +90,27 @@ var handlers = {
     );
     todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
     toggleCompletedPositionInput.value = "";
+    view.displayTodos();
+  },
+  toggleCompleted: function() {
+    todoList.toggleAll();
+    view.displayTodos();
   }
 };
 
-
 var view = {
   displayTodos: function() {
-    var todosUl = document.querySelector('ul');
-    todosUl.innerHTML = '';
+    var todosUl = document.querySelector("ul");
+    todosUl.innerHTML = "";
     for (var i = 0; i < todoList.todos.length; i++) {
-      var todoLi = document.createElement('li');
+      var todoLi = document.createElement("li");
       var todo = todoList.todos[i];
-      var todoTextWithCompletion = '';
+      var todoTextWithCompletion = "";
 
       if (todo.completed === true) {
-        todoTextWithCompletion = '(X) ' + todoText;
+        todoTextWithCompletion = "(X) " + todoText;
       } else {
-        todoTextWithCompletion = '( ) ' + todoText;
+        todoTextWithCompletion = "( ) " + todoText;
       }
 
       todoLi.textContent = todoTextWithCompletion;
