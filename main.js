@@ -1,13 +1,16 @@
 /*
-Version 9: Escape from the Console
+Version 10: Click to Delete 
 
-1. There should be an li element for every todo.
--------There should be a new object with a function to view array items.
--------DisplayTodos should first clear current li's before adding new ones.
-2. Each li element should contain .todoText.
-3. Each li element should show .completed.
--------Add object to the end of all handlers.
--------Delete the Display Todos button & curresponding method in the handlers object, as well as all other previous displayTodos methods.
+1 - There should be a function to create delete buttons.
+2 - There should be a delete button for each todo.
+3 - Each Li should have an id with the todo position.
+4 - Delete buttons should have access to the todo id.
+5 - Clicking delete should update todoList.todos and the DOM.
+
+// get rid of deleteTodoPositionInput variable.
+// make this a method of the todo object.
+// method must be called for it to run.
+// delete HTML delete button & input.
 
 */
 
@@ -77,11 +80,7 @@ var handlers = {
     view.displayTodos();
   },
   deleteTodo: function(position) {
-    var deleteTodoPositionInput = document.getElementById(
-      "deleteTodoPositionInput"
-    );
-    todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
-    deleteTodoPositionInput.value = "";
+    todoList.deleteTodo(position);
     view.displayTodos();
   },
   toggleCompleted: function() {
@@ -113,8 +112,31 @@ var view = {
         todoTextWithCompletion = "( ) " + todoText;
       }
 
+      todoLi.id = i;
       todoLi.textContent = todoTextWithCompletion;
+      todoLi.appendChild(this.createDeleteButton());
       todosUl.appendChild(todoLi);
     }
+  },
+  createDeleteButton: function() {
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.className = 'deleteButton';
+    return deleteButton;
+  },
+  setUpEventListeners: function() {
+    var todosUl = document.querySelector('ul');
+
+    todosUl.addEventListener('click', function(event) {
+      // Get the element that was clicked on.
+      var elementClicked = event.target;
+
+      // Check if element clicked is a delete button.
+      if (elementClicked.className === 'deleteButton') {
+        handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+      }
+    });
   }
 };
+
+view.setUpEventListeners();
